@@ -24,8 +24,8 @@
 			else if ( 'HTMLCanvasElement' in window )
 				return this.css( 'visibility', 'hidden' ).each(function(){
 					var origimg = this,
-						canvas  = $('<canvas>'),
-						context = canvas[0].getContext('2d'),
+						canvas  = $('<canvas>')[0],
+						context = canvas.getContext('2d'),
 						overimg = new Image(),
 						maskimg = new Image();
 					overimg.src = origimg.src;
@@ -33,12 +33,13 @@
 					imagesReady( 
 						[ maskimg, overimg ],
 						function(){
-							canvas.width( overimg.width ).height( overimg.height );
+							canvas.width  = overimg.width;
+							canvas.height = overimg.height;
 							context.globalCompositeOperation = 'source-over';
 							context.drawImage( maskimg, 0, 0, maskimg.width, maskimg.height );
 							context.globalCompositeOperation = 'source-atop';
 							context.drawImage( overimg, 0, 0, overimg.width, overimg.height );
-							$(origimg).attr( 'src', canvas[0].toDataURL('image/png') ).css( 'visibility','visible' );
+							$(origimg).attr( 'src', canvas.toDataURL('image/png') ).css( 'visibility','visible' );
 						}
 					);
 				});
