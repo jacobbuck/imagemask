@@ -16,34 +16,29 @@
 				});
 			}
 			// Use Webkit CSS Mask (non-standard, but still awesome)
-			if ( 'webkitMask' in this.get(0).style )
+			if ( 'webkitMask' in this[0].style )
 				return this.each(function(){
 					this.style.webkitMask = 'url(' + mask_url + ')';
 				});
 			// Use Canvas Mask
 			else if ( 'HTMLCanvasElement' in window )
-				return this.each(function(){
+				return this.css( 'visibility', 'hidden' ).each(function(){
 					var origimg = this,
 						canvas  = $('<canvas>'),
-						context = canvas.get(0).getContext('2d'),
+						context = canvas[0].getContext('2d'),
 						overimg = new Image(),
 						maskimg = new Image();
 					overimg.src = origimg.src;
 					maskimg.src = mask_url;
-					$.each(
-						['id','className','width','height','title'],
-						function( i, val ){
-							canvas.prop( val, origimg[ val ] );
-						}
-					)
-					$(origimg).replaceWith(canvas);
 					imagesReady( 
 						[ maskimg, overimg ],
 						function(){
+							canvas.width( overimg.width ).height( overimg.height );
 							context.globalCompositeOperation = 'source-over';
 							context.drawImage( maskimg, 0, 0, maskimg.width, maskimg.height );
 							context.globalCompositeOperation = 'source-atop';
 							context.drawImage( overimg, 0, 0, overimg.width, overimg.height );
+							$(origimg).attr( 'src', canvas[0].toDataURL('image/png') ).css( 'visibility','visible' );
 						}
 					);
 				});

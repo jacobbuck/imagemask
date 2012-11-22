@@ -27,23 +27,18 @@ window.imgMask = function ( origimg, mask_url ) {
 				maskimg = new Image(); 
 			overimg.src = origimg.src;
 			maskimg.src = mask_url;
-			for ( 
-				var a = ['id','className','width','height','title'],
-					i = a.length - 1, 
-					v;
-				v = a[i], i >= 0;
-				i--
-			) {
-				canvas[ v ] = origimg[ v ];
-			}
-			origimg.parentNode.replaceChild( canvas, origimg );
+			origimg.style.visibility = 'hidden';
 			imagesReady( 
 				[ maskimg, overimg ], 
 				function(){
+					canvas.width  = overimg.width;
+					canvas.height = overimg.height;
 					context.globalCompositeOperation = 'source-over';
 					context.drawImage( maskimg, 0, 0, maskimg.width, maskimg.height );
 					context.globalCompositeOperation = 'source-atop';
 					context.drawImage( overimg, 0, 0, overimg.width, overimg.height );
+					origimg.src = canvas.toDataURL('image/png');
+					origimg.style.visibility = 'visible';
 				}
 			);
 		}())
