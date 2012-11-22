@@ -26,8 +26,6 @@ imgMask( document.getElementByID('myimage'), 'mymask.png' );
 
 Works on all browsers which support [HTML Canvas Element](http://caniuse.com/canvas).
 
-Webkit browsers uses native (but non-standard) `-webkit-mask` CSS property.
-
 ## Limitations ##
 
 - Only works with the HTML Image Element (`<img>`).

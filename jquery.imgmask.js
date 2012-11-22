@@ -15,13 +15,8 @@
 						callback();
 				});
 			}
-			// Use Webkit CSS Mask (non-standard, but still awesome)
-			if ( 'webkitMask' in this[0].style )
-				return this.css({ 
-					webkitMask: 'url(' + mask_url + ') ' + ( stretch ? 'stretch' : 'no-repeat' )
-				});
 			// Use Canvas Mask
-			else if ( 'HTMLCanvasElement' in window )
+			if ( 'HTMLCanvasElement' in window )
 				return this.css( 'visibility', 'hidden' ).each(function(){
 					var origimg = this,
 						canvas  = $('<canvas>')[0],
