@@ -5,7 +5,7 @@
  */
 (function($){
 	$.fn.extend({
-		imgMask: function ( mask_url ) {
+		imgMask: function ( mask_url, stretch ) {
 			// Simple ImagesReady Function
 			function imagesReady ( images, callback ) {
 				var total  = images.length,
@@ -17,8 +17,8 @@
 			}
 			// Use Webkit CSS Mask (non-standard, but still awesome)
 			if ( 'webkitMask' in this[0].style )
-				return this.each(function(){
-					this.style.webkitMask = 'url(' + mask_url + ')';
+				return this.css({ 
+					webkitMask: 'url(' + mask_url + ') ' + ( stretch ? 'stretch' : 'no-repeat' )
 				});
 			// Use Canvas Mask
 			else if ( 'HTMLCanvasElement' in window )
@@ -36,7 +36,10 @@
 							canvas.width  = overimg.width;
 							canvas.height = overimg.height;
 							context.globalCompositeOperation = 'source-over';
-							context.drawImage( maskimg, 0, 0, maskimg.width, maskimg.height );
+							context.drawImage( maskimg, 0, 0, 
+								stretch ? overimg.width : maskimg.width, 
+								stretch ? overimg.height : maskimg.height
+							);
 							context.globalCompositeOperation = 'source-atop';
 							context.drawImage( overimg, 0, 0, overimg.width, overimg.height );
 							$(origimg).attr( 'src', canvas.toDataURL('image/png') ).css( 'visibility','visible' );

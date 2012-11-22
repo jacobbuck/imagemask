@@ -4,11 +4,19 @@ Cross browser image masking.
 
 ## jQuery Plugin Usage (jquery-imgmask.js) ##
 
+$( element || selector ).imgMask( mask_url, stretch );
+
+#### Example ####
+
 ``` js
-$('#myimage').imgMask('mymask.png');
+$('#myimage').imgMask( 'mymask.png', true );
 ```
 
 ## Standalone Usage (imgmask.js) ##
+
+imgMask( element, mask_url, stretch  )
+
+#### Example ####
 
 ``` js
 imgMask( document.getElementByID('myimage'), 'mymask.png' );

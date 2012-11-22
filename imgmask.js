@@ -3,7 +3,7 @@
  * https://github.com/jacobbuck/imgMask.js
  * Licensed under the terms of the MIT license.
  */
-window.imgMask = function ( origimg, mask_url ) {
+window.imgMask = function ( origimg, mask_url, stretch ) {
 	// Some Functions
 	function imagesReady ( images, callback ) {
 		var total  = images.length,
@@ -17,7 +17,7 @@ window.imgMask = function ( origimg, mask_url ) {
 	}
 	// Webkit CSS Mask
 	if ( 'webkitMask' in origimg.style ) {
-		origimg.style.webkitMask = 'url('+mask_url+')';
+		origimg.style.webkitMask = 'url(' + mask_url + ') ' + ( stretch ? 'stretch' : 'no-repeat' );
 	// Canvas Mask
 	} else if ( 'HTMLCanvasElement' in window ) {
 		(function(){
@@ -34,7 +34,10 @@ window.imgMask = function ( origimg, mask_url ) {
 					canvas.width  = overimg.width;
 					canvas.height = overimg.height;
 					context.globalCompositeOperation = 'source-over';
-					context.drawImage( maskimg, 0, 0, maskimg.width, maskimg.height );
+					context.drawImage( maskimg, 0, 0, 
+						stretch ? overimg.width : maskimg.width, 
+						stretch ? overimg.height : maskimg.height
+					);
 					context.globalCompositeOperation = 'source-atop';
 					context.drawImage( overimg, 0, 0, overimg.width, overimg.height );
 					origimg.src = canvas.toDataURL('image/png');
