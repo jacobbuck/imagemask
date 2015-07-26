@@ -17,7 +17,7 @@
 	// @param images Array
 	// @param callback Function
 	function imagesReady (images, callback) {
-		var length = images.length,
+		var length = images.length;
 		var loaded = 0;
 		for (var i = 0; i < length; i++) {
 			images[i].onload = function () {
@@ -37,7 +37,7 @@
 
 	// Fire a callback once all images passed have loaded
 	// @param image Node Image to apply mask to
-	// @param image Node|String Mask image
+	// @param mask Node|String Mask image
 	// @param options Object
 	function maskImage (image, mask, options) {
 		options = options || {};

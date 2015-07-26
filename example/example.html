@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>imagemask example</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<img src="./test.jpeg" alt="Test" id="test">
+	<p><a href="https://www.flickr.com/photos/andyrolfes/9344561685/in/photolist-feKjCv-5JgmWX-PSB8x-nqRLwp-5XdbhS-orpkkL-oa7GKW-aF7eR3-aAn8zM-aAn9P2-2fP6r-7K7HVY-7vyoVi-9XMbp2-7K3NLF-7K6qia-7Kaksu-7WKFHa-9Ywjis-oa8pz9-7WRzbq-7WNVD9-6PAEbN-5bumKs-v63gfX-qV5vrx-qCwhoJ-qCDTCz-qV5vh4-qUZZdS-qUZZGN-qCCe9e-a1imNA-7DPyoi-4QyUU2-7Kajvq-7K6q4D-7K6pJB-7K7JQh-7K3NG2-7K3Pnr-7K7Jmh-7Kajgh-7K6pBa-7K7HZS-7K7JFC-7K7JVd-7K3P7z-7K7Jqw-7K6pbK">Photo Source</a></p>
+	<script src="../imagemask.js"></script>
+	<script>
+		imagemask(document.getElementById('test'), './mask.png', {stretch: true});
+	</script>
+</body>
+</html>

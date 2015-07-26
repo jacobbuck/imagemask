@@ -1,31 +1,25 @@
-# imgMask.js #
+# imagemask
 
-Cross browser image masking.
+Cross browser image masking using canvas.
 
-## jQuery Plugin Usage (jquery-imgmask.js) ##
+## Usage
 
-$( element || selector ).imgMask( mask_url, stretch );
+Imagemask has 3 parameters:
 
-#### Example ####
+- image: Image to apply mask to (must be an `<img>` element)
+- mask: Mask image to apply (can be `<img>` element or URL string)
+- options: Optional object of options:
+  - stretch: Set true if mask should strech over image
+  - complete: Function that get's called once the mask has been applied
 
-``` js
-$('#myimage').imgMask( 'mymask.png', true );
+```
+// Standalone
+imagemask(myCoolImage, document.querySelector('img.fancy-mask'));
+
+// With jQuery Adaptor
+$('img.cool').imagemask('/url/to/mask.png', { stretch: true });
 ```
 
-## Standalone Usage (imgmask.js) ##
-
-imgMask( element, mask_url, stretch  )
-
-#### Example ####
-
-``` js
-imgMask( document.getElementByID('myimage'), 'mymask.png' );
-```
-
-## Browser support ##
+## Browser support
 
 Works on all browsers which support [HTML Canvas Element](http://caniuse.com/canvas).
-
-## Limitations ##
-
-- Only works with the HTML Image Element (`<img>`).
